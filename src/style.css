@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-qq: #12b7f5;
+  --color-bilibili: "#00A1D6";
+  --color-netease: "#C20C0C";
+
+  /* 高斯模糊动态背景动画 */
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(40px, -60px) scale(1.1);
+    }
+    66% {
+      transform: translate(-30px, 30px) scale(0.9);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+  --animate-blob: blob 5s infinite alternate;
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  --animate-blink: blink 1s step-end infinite;
+}
+
+/* 全局平滑滚动与字体 */
+html {
+  scroll-behavior: smooth;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* 元素入场动画 */
+.fade-in-up {
+  @apply opacity-0 translate-y-5;
+  @apply transition-[transform,opacity] duration-[600] ease-out;
+}
+.fade-in-up.visible {
+  @apply opacity-100 translate-y-0;
+}
+
+/* 页面切换动画（关键修复区） */
+.page-hidden {
+  @apply opacity-0 pointer-events-none scale-[0.98] absolute top-0 left-0 w-full hidden h-0 overflow-hidden;
+  /* 延迟 0.4s 执行高度塌陷，保证淡出动画平滑播完 */
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    visibility 0s 0.4s,
+    height 0s 0.4s;
+}
+.page-active {
+  @apply opacity-100 pointer-events-auto scale-100 relative visible h-auto overflow-visible;
+  /* 激活时立刻恢复高度，无延迟 */
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    visibility 0s 0s,
+    height 0s 0s;
+}
+
+/* 玻璃拟态效果 (Glassmorphism) */
+.glass {
+  @apply bg-white/60 backdrop-blur-lg border border-solid border-white/30 dark:bg-gray-800/60 dark:border-white/10;
+}
+
+/* 打字机光标闪烁动画 */
+.typing-cursor {
+  @apply inline-block w-0.75 h-[1.1em] bg-current align-text-bottom rounded-xs ml-1 animate-blink;
+}

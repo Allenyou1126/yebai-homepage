@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>夜白的小站</title>
+    
+    <!-- 网页标签图标 (Favicon) -->
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
+
+    <!-- 引入 Tailwind CSS -->
+    <link href="/src/style.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-500 overflow-x-hidden min-h-screen relative">
+    <!-- 动态高斯模糊背景 -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div class="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob dark:mix-blend-screen dark:bg-purple-900"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000 dark:mix-blend-screen dark:bg-yellow-900"></div>
+        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000 dark:mix-blend-screen dark:bg-pink-900"></div>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300 mt-4 px-4">
+        <div class="max-w-max mx-auto glass rounded-full px-6 py-3 flex items-center gap-8 shadow-lg">
+            <button onclick="switchPage('home')" class="nav-btn text-sm font-semibold tracking-wide hover:text-blue-500 transition-colors">主页</button>
+            <button onclick="switchPage('about')" class="nav-btn text-sm font-semibold tracking-wide hover:text-blue-500 transition-colors">关于我</button>
+            
+            <!-- 主题切换按钮 -->
+            <button onclick="toggleTheme()" class="ml-4 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" title="切换主题">
+                <svg id="theme-icon-light" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                <svg id="theme-icon-dark" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 主体内容容器 -->
+    <main class="container mx-auto px-4 pt-32 pb-10 max-w-4xl relative">
+        
+        <!-- ==================== 1. 主页板块 ==================== -->
+        <section id="home" class="page-view page-active w-full flex flex-col items-center text-center">
+            
+            <div class="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-2xl mb-8 fade-in-up border-4 border-white dark:border-gray-700">
+                <img src="/assets/avatar.png" alt="我的头像" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            </div>
+
+            <!-- 打字机文本容器 -->
+            <h1 id="tw-h1" class="text-4xl md:text-5xl font-bold mb-4 fade-in-up min-h-10 md:min-h-12"></h1>
+            <p id="tw-p" class="text-lg text-gray-600 dark:text-gray-300 mb-12 max-w-2xl fade-in-up min-h-7"></p>
+
+            <!-- 社交链接矩阵 -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-2xl fade-in-up">
+                
+                <a href="https://space.bilibili.com/497466616" target="_blank" class="group glass rounded-2xl p-6 flex flex-col items-center justify-center gap-3 hover:-translate-y-2 transition-transform duration-300 hover:shadow-xl cursor-pointer">
+                    <div class="relative w-10 h-10">
+                        <img src="https://cdn.simpleicons.org/bilibili/6b7280" class="absolute inset-0 w-full h-full transition-opacity duration-300 group-hover:opacity-0 dark:opacity-0">
+                        <img src="https://cdn.simpleicons.org/bilibili/ffffff" class="absolute inset-0 w-full h-full transition-opacity duration-300 opacity-0 dark:opacity-100 group-hover:dark:opacity-0">
+                        <img src="https://cdn.simpleicons.org/bilibili/00A1D6" class="absolute inset-0 w-full h-full transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                    </div>
+                    <span class="font-medium group-hover:text-bilibili transition-colors">Bilibili</span>
+                </a>
+
+                <a href="https://music.163.com/#/user?id=1572242510" target="_blank" class="group glass rounded-2xl p-6 flex flex-col items-center justify-center gap-3 hover:-translate-y-2 transition-transform duration-300 hover:shadow-xl cursor-pointer">
+                    <div class="relative w-10 h-10">
+                        <img src="https://cdn.simpleicons.org/neteasecloudmusic/6b7280" class="absolute inset-0 w-full h-full transition-opacity duration-300 group-hover:opacity-0 dark:opacity-0">
+                        <img src="https://cdn.simpleicons.org/neteasecloudmusic/ffffff" class="absolute inset-0 w-full h-full transition-opacity duration-300 opacity-0 dark:opacity-100 group-hover:dark:opacity-0">
+                        <img src="https://cdn.simpleicons.org/neteasecloudmusic/C20C0C" class="absolute inset-0 w-full h-full transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                    </div>
+                    <span class="font-medium group-hover:text-netease transition-colors">网易云音乐</span>
+                </a>
+
+                <a href="https://x.com/YeBai_Furry" target="_blank" class="group glass rounded-2xl p-6 flex flex-col items-center justify-center gap-3 hover:-translate-y-2 transition-transform duration-300 hover:shadow-xl cursor-pointer">
+                    <div class="relative w-10 h-10">
+                        <img src="https://cdn.simpleicons.org/x/6b7280" class="absolute inset-0 w-full h-full transition-opacity duration-300 group-hover:opacity-0 dark:opacity-0">
+                        <img src="https://cdn.simpleicons.org/x/000000" class="absolute inset-0 w-full h-full transition-opacity duration-300 opacity-0 group-hover:opacity-100 dark:hidden">
+                        <img src="https://cdn.simpleicons.org/x/ffffff" class="absolute inset-0 w-full h-full transition-opacity duration-300 opacity-0 dark:opacity-100 dark:group-hover:opacity-100">
+                    </div>
+                    <span class="font-medium group-hover:text-black dark:group-hover:text-white transition-colors">Twitter (X)</span>
+                </a>
+
+                <a href="https://steamcommunity.com/id/yebaiWN" target="_blank" class="group glass rounded-2xl p-6 flex flex-col items-center justify-center gap-3 hover:-translate-y-2 transition-transform duration-300 hover:shadow-xl cursor-pointer">
+                    <div class="relative w-10 h-10">
+                        <img src="https://cdn.simpleicons.org/steam/6b7280" class="absolute inset-0 w-full h-full transition-opacity duration-300 group-hover:opacity-0 dark:opacity-0">
+                        <img src="https://cdn.simpleicons.org/steam/171a21" class="absolute inset-0 w-full h-full transition-opacity duration-300 opacity-0 group-hover:opacity-100 dark:hidden">
+                        <img src="https://cdn.simpleicons.org/steam/ffffff" class="absolute inset-0 w-full h-full transition-opacity duration-300 opacity-0 dark:opacity-100 dark:group-hover:opacity-100">
+                    </div>
+                    <span class="font-medium group-hover:text-[#171a21] dark:group-hover:text-white transition-colors">Steam</span>
+                </a>
+
+                <button onclick="openQRModal('qq')" class="group glass rounded-2xl p-6 flex flex-col items-center justify-center gap-3 hover:-translate-y-2 transition-transform duration-300 hover:shadow-xl cursor-pointer">
+                    <div class="relative w-10 h-10">
+                        <img src="https://cdn.simpleicons.org/qq/6b7280" class="absolute inset-0 w-full h-full transition-opacity duration-300 group-hover:opacity-0 dark:opacity-0">
+                        <img src="https://cdn.simpleicons.org/qq/ffffff" class="absolute inset-0 w-full h-full transition-opacity duration-300 opacity-0 dark:opacity-100 group-hover:dark:opacity-0">
+                        <img src="https://cdn.simpleicons.org/qq/12B7F5" class="absolute inset-0 w-full h-full transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                    </div>
+                    <span class="font-medium group-hover:text-qq transition-colors">QQ</span>
+                </button>
+
+                <button onclick="openQRModal('qqgroup')" class="group glass rounded-2xl p-6 flex flex-col items-center justify-center gap-3 hover:-translate-y-2 transition-transform duration-300 hover:shadow-xl cursor-pointer">
+                    <div class="relative w-10 h-10">
+                        <img src="https://cdn.simpleicons.org/qq/6b7280" class="absolute inset-0 w-full h-full transition-opacity duration-300 group-hover:opacity-0 dark:opacity-0">
+                        <img src="https://cdn.simpleicons.org/qq/ffffff" class="absolute inset-0 w-full h-full transition-opacity duration-300 opacity-0 dark:opacity-100 group-hover:dark:opacity-0">
+                        <img src="https://cdn.simpleicons.org/qq/12B7F5" class="absolute inset-0 w-full h-full transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                    </div>
+                    <span class="font-medium group-hover:text-qq transition-colors">QQ群</span>
+                </button>
+
+            </div>
+        </section>
+
+        <!-- ==================== 2. 关于我板块 ==================== -->
+        <section id="about" class="page-view page-hidden w-full flex flex-col">
+            <div class="glass rounded-3xl p-8 md:p-12 w-full shadow-2xl fade-in-up">
+                <h2 class="text-3xl font-bold mb-6 border-b-2 border-blue-500 pb-2 inline-block">关于我</h2>
+                
+                <div class="space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+                    <p class="fade-in-up">
+                        你好，这里是夜白，目前是专科大学生。你可以叫我夜白。ISFP，Furry，平时主要活跃在江苏南通（欢迎本地兽兽扩列）
+                    </p>
+                   
+                    <h3 class="text-xl font-bold mt-8 mb-4 text-black dark:text-white fade-in-up">✨ 兴趣爱好</h3>
+                    <ul class="list-disc list-inside space-y-2 fade-in-up pl-2">
+                        <li>🛡️ 安防爱好者（？）：喜欢捣鼓安防相关的东西</li>
+                        <li>🖥️ 业余计算机爱好者：说白了就是个喜欢玩电脑的（？）</li>
+                        <li>❤️ 喜欢模拟/竞技/休闲/3A类游戏</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mt-8 mb-4 text-black dark:text-white fade-in-up">💾 常用设备</h3>
+                    <ul class="list-disc list-inside space-y-2 fade-in-up pl-2">
+                        <li>💻:ASUS TF-Gaming 2(Intel Core i7-11800H & NVIDIA GeForce RTX 3050Ti 4GB)</li>
+                        <li>📱:Redmi K70(16+512)</li>
+                        <li>📱:Xiaomi 13(8+256)</li>
+                        <li>📱:Redmi K40(12+256)</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mt-8 mb-4 text-black dark:text-white fade-in-up">🎮 我会玩的游戏</h3>
+                    <ul class="list-disc list-inside space-y-2 fade-in-up pl-2">
+                        <li>🚛 欧洲卡车模拟2</li>
+                        <li>🏎️ WRC7 世界拉力锦标赛</li>
+                        <li>🚗 极限竞速：地平线5</li>
+                        <li>🧑‍💻 看门狗2</li>
+                        <li>🏙️ 城市：天际线</li>
+                        <li>💣 CS2（菜狗一个）</li>
+                        <li>⚔️ PUBG(也是菜狗，只和好友打打)</li>
+                        <li>🚆 模拟火车世界系列（火车迷是这样的）</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mt-8 mb-4 text-black dark:text-white fade-in-up">⬇️ 展示一下自己的崽子</h3>
+
+                    <!-- ==================== 无裁切多图展示区域 ==================== -->
+                    <div class="mt-10 flex flex-col gap-6 fade-in-up">
+                        
+                        <!-- 第 1 张图片 -->
+                        <div class="rounded-xl overflow-hidden shadow-lg bg-black/5 dark:bg-white/5">
+                            <img src="/assets/picture1.png" alt="展示图片1" class="w-full h-auto">
+                        </div>
+
+                        <!-- 第 2 张图片 -->
+                        <div class="rounded-xl overflow-hidden shadow-lg bg-black/5 dark:bg-white/5">
+                            <img src="/assets/picture2.png" alt="展示图片2" class="w-full h-auto">
+                        </div>
+
+                        <!-- 第 3 张图片 -->
+                        <div class="rounded-xl overflow-hidden shadow-lg bg-black/5 dark:bg-white/5">
+                            <img src="/assets/picture3.png" alt="展示图片2" class="w-full h-auto">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== 二维码弹窗 (Modal) ==================== -->
+    <div id="qr-modal" class="fixed inset-0 z-60 hidden items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="closeQRModal()"></div>
+        <div class="glass rounded-2xl p-8 relative z-10 max-w-sm w-full flex flex-col items-center transform scale-95 opacity-0 transition-all duration-300" id="qr-modal-content">
+            <button onclick="closeQRModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 id="qr-title" class="text-xl font-bold mb-6 text-center">添加好友</h3>
+            <div class="bg-white p-2 rounded-xl shadow-inner w-48 h-48 flex justify-center items-center">
+                <img id="qr-image" src="" alt="二维码" class="w-full h-full object-contain">
+            </div>
+            <p class="mt-4 text-sm text-gray-500 dark:text-gray-400 text-center">打开手机客户端扫一扫</p>
+        </div>
+    </div>
+
+    <script src="/src/main.ts" type="module"></script>
+</body>
+</html>
