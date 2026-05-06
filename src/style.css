@@ -30,12 +30,13 @@
     }
   }
   --animate-blink: blink 1s step-end infinite;
+
+  --font-default: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif
 }
 
 /* 全局平滑滚动与字体 */
 html {
-  scroll-behavior: smooth;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  @apply scroll-smooth font-default;
 }
 
 .animation-delay-2000 {
